@@ -3,3 +3,8 @@
 talkevent.ipr
 talkevent.iws
 talkevent.iml
+/bin/
+.classpath
+.project
+.settings/
+build/
