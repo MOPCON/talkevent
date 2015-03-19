@@ -6,6 +6,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,4 +43,17 @@ public class TalkServiceTest {
 
     	  assertEquals("Returned Talk should come from the dao", savedTalk, returnedTalk);
     }
+	
+	@Test
+	public void listTalks() throws Exception {
+		List<Talk> talks = Arrays.asList(new Talk(), new Talk());
+		when(talkDao.findAll()).thenReturn(talks);
+
+		List<Talk> returnedTalks = service.list();
+
+		verify(talkDao, times(1)).findAll();
+
+		assertEquals("Returned Talk list should come from the dao", talks,
+				returnedTalks);
+	}
 }

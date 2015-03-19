@@ -1,5 +1,7 @@
 package talkevent.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import talkevent.domain.Talk;
 import talkevent.service.TalkService;
 
 @RestController
+@RequestMapping(value = "/talk")
 public class TalkController {
 
 	private TalkService talkService;
@@ -21,9 +24,14 @@ public class TalkController {
 		this.talkService = talkService;
 	}
 	
-    @RequestMapping(value = "/talk", method = RequestMethod.POST)
-	public Talk createTalk(@RequestBody @Valid Talk talk) {
+    @RequestMapping(method = RequestMethod.POST)
+	public Talk create(@RequestBody @Valid Talk talk) {
 		return talkService.create(talk);
+	}
+
+    @RequestMapping(method = RequestMethod.GET)
+	public List<Talk> list() {
+		return talkService.list();
 	}
 	
 }

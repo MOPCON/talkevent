@@ -1,10 +1,13 @@
 package talkevent.controller;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,27 +22,41 @@ import talkevent.service.TalkService;
 @RunWith(MockitoJUnitRunner.class)
 public class TalkControllerTest {
 
-    @Mock
-    private TalkService talkService;
+	@Mock
+	private TalkService talkService;
 
-    private TalkController controller;
-    
-    @Before
-    public void setUp() {
-    	controller = new TalkController(talkService);
-    }
-    
-    @Test
-    public void shouldCreateTalk() throws Exception {
-    	final Talk savedTalk = new Talk();
-    	  when(talkService.create(any(Talk.class))).thenReturn(savedTalk);
+	private TalkController controller;
 
-    	  final Talk Talk = new Talk();
-    	  Talk returnedTalk = controller.createTalk(Talk);
+	@Before
+	public void setUp() {
+		controller = new TalkController(talkService);
+	}
 
-    	  verify(talkService, times(1)).create(Talk);
+	@Test
+	public void shouldCreateTalk() throws Exception {
+		final Talk savedTalk = new Talk();
+		when(talkService.create(any(Talk.class))).thenReturn(savedTalk);
 
-    	  assertEquals("Returned Talk should come from the service", savedTalk, returnedTalk);
-    }
+		final Talk Talk = new Talk();
+		Talk returnedTalk = controller.create(Talk);
+
+		verify(talkService, times(1)).create(Talk);
+
+		assertEquals("Returned Talk should come from the service", savedTalk,
+				returnedTalk);
+	}
+
+	@Test
+	public void listTalks() throws Exception {
+		List<Talk> talks = Arrays.asList(new Talk(), new Talk());
+		when(talkService.list()).thenReturn(talks);
+
+		List<Talk> returnedTalks = controller.list();
+
+		verify(talkService, times(1)).list();
+
+		assertEquals("Returned Talk list should come from the service", talks,
+				returnedTalks);
+	}
 
 }
