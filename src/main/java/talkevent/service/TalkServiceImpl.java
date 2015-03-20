@@ -1,6 +1,7 @@
 package talkevent.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -22,8 +23,10 @@ public class TalkServiceImpl implements TalkService {
 
 	@Transactional
 	@Override
-	public Talk create(Talk talk) {
-		return talkDao.save(talk);
+	public Talk createTalk(String topic) {
+		Talk t = Talk.create(topic);
+		t.setId(UUID.randomUUID().toString());
+		return talkDao.save(t);
 	}
 
 	@Transactional

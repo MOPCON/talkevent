@@ -6,7 +6,7 @@ import talkevent.domain.Talk;
 
 public interface TalkService {
 
-	Talk create(Talk talk);
+	Talk createTalk(String topic);
 
 	List<Talk> list();
 

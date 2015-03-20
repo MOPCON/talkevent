@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import talkevent.controller.param.TalkVO;
 import talkevent.domain.Talk;
 import talkevent.service.TalkService;
 
@@ -25,8 +26,8 @@ public class TalkController {
 	}
 	
     @RequestMapping(method = RequestMethod.POST)
-	public Talk create(@RequestBody @Valid Talk talk) {
-		return talkService.create(talk);
+	public Talk create(@RequestBody @Valid TalkVO talk) {
+		return talkService.createTalk(talk.getTopic());
 	}
 
     @RequestMapping(method = RequestMethod.GET)

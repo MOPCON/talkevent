@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import talkevent.controller.TalkController;
+import talkevent.controller.param.TalkVO;
 import talkevent.domain.Talk;
 import talkevent.service.TalkService;
 
@@ -34,13 +35,13 @@ public class TalkControllerTest {
 
 	@Test
 	public void shouldCreateTalk() throws Exception {
-		final Talk savedTalk = new Talk();
-		when(talkService.create(any(Talk.class))).thenReturn(savedTalk);
+		final Talk savedTalk = Talk.create("");
+		when(talkService.createTalk(any(String.class))).thenReturn(savedTalk);
 
-		final Talk Talk = new Talk();
-		Talk returnedTalk = controller.create(Talk);
+		TalkVO talk = new TalkVO();
+		Talk returnedTalk = controller.create(talk);
 
-		verify(talkService, times(1)).create(Talk);
+		verify(talkService, times(1)).createTalk(any(String.class));
 
 		assertEquals("Returned Talk should come from the service", savedTalk,
 				returnedTalk);
@@ -48,7 +49,7 @@ public class TalkControllerTest {
 
 	@Test
 	public void listTalks() throws Exception {
-		List<Talk> talks = Arrays.asList(new Talk(), new Talk());
+		List<Talk> talks = Arrays.asList(Talk.create(""), Talk.create(""));
 		when(talkService.list()).thenReturn(talks);
 
 		List<Talk> returnedTalks = controller.list();

@@ -10,7 +10,6 @@ public class Talk {
 
 	@Id
 	@Column(name="id", nullable=false, updatable=false)
-	@NotNull
 	private String id;
 
 	@Column(name="topic", nullable=false)
@@ -28,4 +27,18 @@ public class Talk {
 		return topic;
 	}
 	
+	Talk() {}
+	Talk(String id, String topic) {
+		this.id = id;
+		this.topic = topic;
+	}
+	
+	public static Talk create(String topic) {
+		return new Talk(null, topic);
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 }

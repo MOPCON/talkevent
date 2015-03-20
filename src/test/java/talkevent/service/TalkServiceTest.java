@@ -33,20 +33,21 @@ public class TalkServiceTest {
 	
 	@Test
     public void shouldCreateTalk() throws Exception {
-    	final Talk savedTalk = new Talk();
+    	final Talk savedTalk = Talk.create("");
+    	  
     	  when(talkDao.save(any(Talk.class))).thenReturn(savedTalk);
+    	  
+    	  String topic = "kk";
+    	  Talk returnedTalk = service.createTalk(topic);
 
-    	  final Talk Talk = new Talk();
-    	  Talk returnedTalk = service.create(Talk);
-
-    	  verify(talkDao, times(1)).save(Talk);
+    	  verify(talkDao, times(1)).save(any(Talk.class));
 
     	  assertEquals("Returned Talk should come from the dao", savedTalk, returnedTalk);
     }
 	
 	@Test
 	public void listTalks() throws Exception {
-		List<Talk> talks = Arrays.asList(new Talk(), new Talk());
+		List<Talk> talks = Arrays.asList(Talk.create(""), Talk.create(""));
 		when(talkDao.findAll()).thenReturn(talks);
 
 		List<Talk> returnedTalks = service.list();
