@@ -1,7 +1,11 @@
 package talkevent.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
@@ -12,33 +16,52 @@ public class Talk {
 	@Column(name="id", nullable=false, updatable=false)
 	private String id;
 
-	@Column(name="topic", nullable=false)
 	@NotNull
+	@Column(name="topic", nullable=false)
 	private String topic;
-//	private String description;
-//	private Date startDate;
-//	private Date endDate;
 
-	public String getId() {
-		return id;
-	}
+	@Column(name="description")
+	private String description;
+	
+	@NotNull
+	@Column(name="startDate")
+	private Date startDate;
+	
+	@NotNull
+	@Column(name="endDate")
+	private Date endDate;
 
 	public String getTopic() {
 		return topic;
 	}
-	
-	Talk() {}
-	Talk(String id, String topic) {
-		this.id = id;
+
+	public void setTopic(String topic) {
 		this.topic = topic;
 	}
-	
-	public static Talk create(String topic) {
-		return new Talk(null, topic);
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setDescription(String description) {
+		this.description = description;
 	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
 
 }

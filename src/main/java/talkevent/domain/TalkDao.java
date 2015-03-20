@@ -1,15 +1,9 @@
 package talkevent.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@Repository
+@RepositoryRestResource(collectionResourceRel = "talk", path = "talk")
 public interface TalkDao extends JpaRepository<Talk, String> {
-
-//	default Talk save(String topic) {
-//		Talk t = Talk.create(topic);
-//		t.setId(UUID.randomUUID().toString());
-//		return this.save(t);
-//	}
 
 }
