@@ -17,3 +17,7 @@ under project folder
 under project folder
 
 ./gradlew run
+
+### Page
+
+http://localhost:8080/manage/talks.html
