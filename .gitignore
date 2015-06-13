@@ -8,4 +8,4 @@ talkevent.iml
 .project
 .settings/
 build/
-src/main/java/talkevent/WebSecurityConfig.java
+target/**/*

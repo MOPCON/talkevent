@@ -2,40 +2,38 @@ package talkevent.domain;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-@Entity
+import org.springframework.data.neo4j.annotation.GraphId;
+import org.springframework.data.neo4j.annotation.NodeEntity;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+//@Entity
+@NodeEntity
 public class Talk {
 
-	@Id
-	@Column(name="id", nullable=false, updatable=false)
-	private String id;
+//	@Id
+	@GraphId
+//	@Column(name="id", nullable=false, updatable=false)
+	private Long id;
 
 	@NotNull
-	@Column(name="topic", nullable=false)
+//	@Column(name="topic", nullable=false)
 	private String topic;
 
-	@Column(name="description")
+//	@Column(name="description")
 	private String description;
 	
 	@NotNull
-	@Column(name="startDate")
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm")
+//	@Column(name="startDate")
 	private Date startDate;
 	
 	@NotNull
-	@Column(name="endDate")
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm")
+//	@Column(name="endDate")
 	private Date endDate;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getTopic() {
 		return topic;
